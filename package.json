@@ -1,0 +1,21 @@
+{
+  "name": "neuro-tune-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.x",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.0.0",
+    "framer-motion": "^10.12.16",
+    "react-icons": "^4.10.1",
+    "react-syntax-highlighter": "^15.5.0"
+  }
+}
