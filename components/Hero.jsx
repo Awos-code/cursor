@@ -1,37 +1,12 @@
-import { motion } from 'framer-motion';
+import React from "react";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-black via-gray-900 to-black text-center p-8">
-      <motion.h1
-        className="text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        Neuro•Tune
-      </motion.h1>
-      <motion.p
-        className="text-xl md:text-2xl mb-6 text-gray-300"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        Музыка. Эффекты. Эмоции.
-      </motion.p>
-      <motion.div
-        className="space-x-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        <a href="https://discord.com/oauth2/authorize?client_id=YOUR_ID&scope=bot" className="px-6 py-3 bg-purple-600 rounded-xl shadow-lg hover:bg-purple-500 transition">
-          ➕ Добавить на сервер
-        </a>
-        <a href="#features" className="px-6 py-3 border border-purple-600 rounded-xl hover:bg-purple-600 transition">
-          Узнать больше
-        </a>
-      </motion.div>
+    <section className="relative flex flex-col items-center justify-center min-h-[60vh] text-center py-16 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] animate-gradient-x">
+      <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-4 drop-shadow-lg">NeuroTune</h1>
+      <p className="text-lg md:text-2xl text-gray-200 mb-8 max-w-xl">Музыкальный AI-бот для Discord. Ваша музыка — ваш стиль, ваш ритм, ваш Discord.</p>
+      <a href="https://discord.com/oauth2/authorize?client_id=1374414380137185312&permissions=2150985024&integration_type=0&scope=bot" target="_blank" rel="noopener noreferrer" className="px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform">Добавить в Discord</a>
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-500/20 via-blue-500/10 to-transparent animate-pulse" />
     </section>
   );
 }
