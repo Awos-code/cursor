@@ -3,9 +3,27 @@ import React, { useEffect, useState } from "react";
 // Здесь можно заменить на реальный API Discord или свой backend
 const API_URL = "https://discord-status-api-mock.vercel.app/api/neurotune";
 
-export default function DiscordStatus() {
+const translations = {
+  ru: {
+    loading: "Загрузка...",
+    online: "Бот онлайн",
+    offline: "Бот оффлайн",
+    servers: "серверов",
+    users: "пользователей"
+  },
+  en: {
+    loading: "Loading...",
+    online: "Bot online",
+    offline: "Bot offline",
+    servers: "servers",
+    users: "users"
+  }
+};
+
+export default function DiscordStatus({ locale = "ru" }) {
   const [data, setData] = useState({ status: "offline", servers: 0, users: 0 });
   const [loading, setLoading] = useState(true);
+  const t = translations[locale];
 
   useEffect(() => {
     fetch(API_URL)
@@ -20,9 +38,9 @@ export default function DiscordStatus() {
   return (
     <div className="flex items-center gap-4 justify-center py-4 animate-fade-in-up">
       <span className={`w-3 h-3 rounded-full ${data.status === "online" ? "bg-green-400 shadow-[0_0_8px_2px_rgba(34,197,94,0.7)]" : "bg-gray-500"} inline-block`} title={data.status === "online" ? "Online" : "Offline"} />
-      <span className="text-white font-semibold text-base">{loading ? "Загрузка..." : data.status === "online" ? "Бот онлайн" : "Бот оффлайн"}</span>
-      <span className="text-fuchsia-300 text-sm">{data.servers} серверов</span>
-      <span className="text-blue-300 text-sm">{data.users} пользователей</span>
+      <span className="text-white font-semibold text-base">{loading ? t.loading : data.status === "online" ? t.online : t.offline}</span>
+      <span className="text-fuchsia-300 text-sm">{data.servers} {t.servers}</span>
+      <span className="text-blue-300 text-sm">{data.users} {t.users}</span>
     </div>
   );
 } 

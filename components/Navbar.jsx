@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import ThemeToggle from "./ThemeToggle";
 import LocaleToggle from "./LocaleToggle";
 
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "Особенности", href: "#features" },
-  { name: "Команды", href: "#commands" },
   { name: "Все команды", href: "#all-commands" },
   { name: "FAQ", href: "#faq" },
   { name: "Контакты", href: "#footer" },
@@ -30,13 +28,13 @@ export default function Navbar() {
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-[#0a0a13]/80 border-b-2 border-fuchsia-500 shadow-[0_2px_24px_0_rgba(168,85,247,0.2)] backdrop-blur-lg">
       <div className="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
-        <span className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-blue-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.7)] select-none flex items-center">
+        {/* Логотип слева */}
+        <span className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-blue-400 drop-shadow-[0_0_12px_rgba(168,85,247,0.7)] select-none">
           NeuroTune
-          <ThemeToggle />
-          <LocaleToggle locale={locale} setLocale={setLocale} />
         </span>
-        {/* Desktop nav */}
-        <div className="hidden md:flex gap-1 md:gap-2 relative">
+        
+        {/* Навигация справа */}
+        <div className="hidden md:flex items-center gap-1 md:gap-2 relative">
           {navLinks.map((link, i) => (
             <a
               key={link.name}
@@ -50,7 +48,9 @@ export default function Navbar() {
               <span className="relative z-10">{link.name}</span>
             </a>
           ))}
+          <LocaleToggle locale={locale} setLocale={setLocale} />
         </div>
+        
         {/* Mobile burger */}
         <button
           className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg border border-fuchsia-500 bg-black/40 shadow-[0_0_8px_2px_rgba(168,85,247,0.3)] focus:outline-none focus:ring-2 focus:ring-fuchsia-400 transition"
@@ -61,6 +61,7 @@ export default function Navbar() {
           <span className={`block w-6 h-0.5 bg-fuchsia-400 mb-1 transition-all duration-300 ${open ? "opacity-0" : ""}`} />
           <span className={`block w-6 h-0.5 bg-fuchsia-400 transition-all duration-300 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
+        
         {/* Mobile nav panel */}
         {open && (
           <div className="fixed inset-0 bg-[#0a0a13]/90 backdrop-blur-lg z-50 flex flex-col items-center justify-center animate-fade-in-up">
@@ -74,10 +75,7 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <div className="flex gap-2 mt-4">
-              <ThemeToggle />
-              <LocaleToggle locale={locale} setLocale={setLocale} />
-            </div>
+            <LocaleToggle locale={locale} setLocale={setLocale} />
           </div>
         )}
       </div>

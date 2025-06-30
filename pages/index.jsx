@@ -1,7 +1,7 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
-import Commands from '../components/Commands';
 import AllCommands from '../components/AllCommands';
 import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
@@ -14,6 +14,8 @@ const sectionVariants = {
 };
 
 export default function Home() {
+  const [locale, setLocale] = useState("ru");
+
   return (
     <>
       <Head>
@@ -34,22 +36,19 @@ export default function Home() {
       <main className="bg-[#0a0a13] min-h-screen">
         <AnimatePresence mode="wait">
           <motion.div key="hero" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Hero />
+            <Hero locale={locale} />
           </motion.div>
           <motion.div key="features" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Features />
-          </motion.div>
-          <motion.div key="commands" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Commands />
+            <Features locale={locale} />
           </motion.div>
           <motion.div key="allcommands" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <AllCommands />
+            <AllCommands locale={locale} />
           </motion.div>
           <motion.div key="faq" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <FAQ />
+            <FAQ locale={locale} />
           </motion.div>
           <motion.div key="footer" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Footer />
+            <Footer locale={locale} />
           </motion.div>
         </AnimatePresence>
       </main>
