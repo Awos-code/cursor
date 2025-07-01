@@ -1,20 +1,14 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useRef } from 'react';
 import Hero from '../components/Hero';
 import Features from '../components/Features';
-import AllCommands from '../components/AllCommands';
+import Commands from '../components/Commands';
 import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
-import { AnimatePresence, motion } from "framer-motion";
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.4,0,0.2,1] } },
-  exit: { opacity: 0, y: -40, transition: { duration: 0.5, ease: [0.4,0,0.2,1] } }
-};
+import Section from '../components/Section';
 
 export default function Home() {
-  const [locale, setLocale] = useState("ru");
+  const scrollRef = useRef();
 
   return (
     <>
@@ -33,24 +27,22 @@ export default function Home() {
         <meta name="twitter:image" content="/favicon.ico" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-[#0a0a13] min-h-screen">
-        <AnimatePresence mode="wait">
-          <motion.div key="hero" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Hero locale={locale} />
-          </motion.div>
-          <motion.div key="features" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Features locale={locale} />
-          </motion.div>
-          <motion.div key="allcommands" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <AllCommands locale={locale} />
-          </motion.div>
-          <motion.div key="faq" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <FAQ locale={locale} />
-          </motion.div>
-          <motion.div key="footer" variants={sectionVariants} initial="hidden" animate="visible" exit="exit">
-            <Footer locale={locale} />
-          </motion.div>
-        </AnimatePresence>
+      <main className="bg-[#0a0a13]">
+        <div ref={scrollRef}>
+          <Section id="home">
+            <Hero />
+          </Section>
+          <Section id="features">
+            <Features />
+          </Section>
+          <Section id="commands" centerContent={false}>
+            <Commands />
+          </Section>
+          <Section id="faq" centerContent={false}>
+            <FAQ />
+          </Section>
+        </div>
+        <Footer />
       </main>
     </>
   );
