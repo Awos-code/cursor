@@ -1,8 +1,8 @@
 import '../styles/globals.css';
 import { useEffect } from 'react';
-import Navbar from "../components/Navbar";
 import MusicNotesBackground from "../components/MusicNotesBackground";
 import Preloader from "../components/Preloader";
+import SplashCursor from "../components/SplashCursor";
 import '../components/i18n';
 import Lenis from '@studio-freight/lenis';
 
@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Preloader />
       <MusicNotesBackground />
-      <Navbar />
+      <SplashCursor />
       <Component {...pageProps} />
     </>
   );

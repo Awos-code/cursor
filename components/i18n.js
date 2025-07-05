@@ -50,6 +50,20 @@ const resources = {
       },
       footer: {
         copyright: '© 2025 NeuroTune. Все права защищены.'
+      },
+      commands: {
+        play: 'Воспроизведение трека или плейлиста по ссылке или названию.',
+        skip: 'Пропустить текущий трек и начать следующий.',
+        stop: 'Остановить воспроизведение и очистить очередь.',
+        pause: 'Приостановить текущий трек.',
+        queue: 'Показать список ожидающих в очереди треков.',
+        shuffle: 'Перемешать порядок треков в очереди.',
+        repeat: 'Включить цикличное повторение текущего трека или всей очереди.',
+        clear: 'Полностью очистить очередь воспроизведения.',
+        autoplay: 'Автоматически подбирать похожие треки после окончания очереди.',
+        profile: 'Вывести вашу статистику и настройки музыкального профиля.',
+        help: 'Показать все доступные команды и их синтаксис.',
+        ping: 'Проверить задержку бота и соединения с сервером.'
       }
     }
   },
@@ -101,6 +115,20 @@ const resources = {
       },
       footer: {
         copyright: '© 2025 NeuroTune. All rights reserved.'
+      },
+      commands: {
+        play: 'Play a track or playlist by link or name.',
+        skip: 'Skip the current track and start the next one.',
+        stop: 'Stop playback and clear the queue.',
+        pause: 'Pause the current track.',
+        queue: 'Show the list of tracks waiting in the queue.',
+        shuffle: 'Shuffle the order of tracks in the queue.',
+        repeat: 'Enable repeat for the current track or the whole queue.',
+        clear: 'Completely clear the playback queue.',
+        autoplay: 'Automatically pick similar tracks after the queue ends.',
+        profile: 'Show your music profile stats and settings.',
+        help: 'Show all available commands and their syntax.',
+        ping: 'Check the bot and server latency.'
       }
     }
   }

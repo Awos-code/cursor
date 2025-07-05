@@ -19,7 +19,19 @@ const commandGroups = [
 export default function Commands() {
   const { t } = useTranslation();
   const [active, setActive] = useState(0);
+  const commands = commandGroups[active].commands;
+  const [flipped, setFlipped] = useState(Array(commands.length).fill(false));
   const groupNames = [t('allCommands.all'), t('allCommands.music'), t('allCommands.info')];
+
+  // Сброс flip при смене группы
+  React.useEffect(() => {
+    setFlipped(Array(commands.length).fill(false));
+  }, [active]);
+
+  const handleFlip = idx => {
+    setFlipped(f => f.map((val, i) => (i === idx ? !val : val)));
+  };
+
   return (
     <section id="commands" className="py-20 text-white">
       <div className="max-w-4xl mx-auto">
@@ -38,11 +50,28 @@ export default function Commands() {
           ))}
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {commandGroups[active].commands.map((cmd) => (
-            <div key={cmd} className="flex flex-col items-center p-6 rounded-2xl bg-[#181826]/80 border border-fuchsia-500 shadow-[0_0_24px_6px_rgba(168,85,247,0.3)] hover:shadow-[0_0_32px_12px_rgba(168,85,247,0.5)] transition-all duration-300">
-              <span className="font-mono text-lg text-fuchsia-300 mb-2">{cmd}</span>
-            </div>
-          ))}
+          {commands.map((cmd, idx) => {
+            const cmdKey = cmd.replace("/", "");
+            return (
+              <div key={cmd} className="[perspective:1000px]">
+                <div
+                  className={`relative w-full h-32 transition-transform duration-500 [transform-style:preserve-3d] ${flipped[idx] ? '[transform:rotateY(180deg)]' : ''}`}
+                  onClick={() => handleFlip(idx)}
+                >
+                  {/* Front */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 rounded-2xl bg-[#181826]/80 border border-fuchsia-500 shadow-[0_0_24px_6px_rgba(168,85,247,0.3)] hover:shadow-[0_0_32px_12px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-pointer [backface-visibility:hidden]">
+                    <span className="font-mono text-lg text-fuchsia-300 mb-2">{cmd}</span>
+                  </div>
+                  {/* Back */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 rounded-2xl bg-[#1e1e2e]/90 border border-fuchsia-500 shadow-[0_0_32px_12px_rgba(168,85,247,0.5)] transition-all duration-300 cursor-pointer [transform:rotateY(180deg)] [backface-visibility:hidden]">
+                    <span className="text-base text-white text-center break-words max-h-16 md:max-h-20 overflow-y-auto leading-snug px-1 select-text" style={{wordBreak: 'break-word'}}>
+                      {t(`commands.${cmdKey}`) || 'Описание команды...'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
