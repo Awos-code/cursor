@@ -66,7 +66,7 @@ export default function Features() {
               key={i}
               onMouseEnter={() => !isMobile && window.matchMedia('(pointer: fine)').matches && setHovered(i)}
               onMouseLeave={() => setHovered(null)}
-              className="feature-card"
+              className={`feature-card${isMobile ? ' mobile-fade-in' : ''}`}
               style={{ '--card-index': i }}
             >
           <FeatureCard
@@ -75,7 +75,7 @@ export default function Features() {
             description={feature.description}
             color={feature.color}
                 enableTilt={!isMobile && hovered === i && window.matchMedia('(pointer: fine)').matches}
-                className={isMobile ? '' : `fade-in-up`}
+                className={isMobile ? 'mobile-fade-in' : `fade-in-up`}
                 style={isMobile ? {} : {animationDelay: `${i * 80}ms`}}
           />
             </div>

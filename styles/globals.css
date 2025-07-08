@@ -652,6 +652,16 @@
   .fc-details p {
     font-size: 0.85rem;
   }
+
+  .mobile-fade-in {
+    opacity: 0;
+    animation: mobile-fade-in 0.6s ease forwards;
+  }
+}
+
+@keyframes mobile-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @media (max-width: 480px) {
