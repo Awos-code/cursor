@@ -20,6 +20,9 @@ module.exports = {
         'spin-slow': 'spin 2s linear infinite',
         'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
         'star-movement-top': 'star-movement-top linear infinite alternate',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        gradient: 'gradient 8s linear infinite',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -83,13 +86,6 @@ module.exports = {
           '50%': { backgroundPosition: '100% 50%' },
           '100%': { backgroundPosition: '0% 50%' },
         },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
-        'star-movement-top': 'star-movement-top linear infinite alternate',
-        gradient: 'gradient 8s linear infinite',
       },
     },
   },

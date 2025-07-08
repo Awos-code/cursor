@@ -35,7 +35,9 @@ export default function MusicNotesBackground() {
 
   useEffect(() => {
     const container = containerRef.current;
-    const noteCount = 40;
+    const isMobile = window.innerWidth < 768;
+    const isSmallMobile = window.innerWidth < 480;
+    const noteCount = isSmallMobile ? 8 : isMobile ? 12 : 40;
     const noteEls = [];
     const noteObjs = [];
     const vw = window.innerWidth;
@@ -50,7 +52,7 @@ export default function MusicNotesBackground() {
       el.style.top = `0px`;
       el.style.fontSize = `${getRandom(18, 38)}px`;
       el.style.color = getRandomColor();
-      el.style.opacity = getRandom(0.18, 0.32);
+      el.style.opacity = getRandom(0.22, 0.36);
       el.style.filter = "drop-shadow(0 0 12px #a78bfa)";
       el.style.pointerEvents = "none";
       el.style.transition = "opacity 0.5s, color 0.3s";
@@ -62,8 +64,8 @@ export default function MusicNotesBackground() {
         el,
         x: getRandom(0, vw),
         y: getRandom(0, vh),
-        vx: getRandom(-0.4, 0.4),
-        vy: getRandom(-0.4, 0.4),
+        vx: getRandom(-0.12, 0.12),
+        vy: getRandom(-0.12, 0.12),
         r: parseFloat(el.style.fontSize) / 2 + 6,
         color: el.style.color,
       });
@@ -89,10 +91,10 @@ export default function MusicNotesBackground() {
           const dx = n2.x - n1.x;
           const dy = n2.y - n1.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < n1.r + n2.r) {
-            // Простое отталкивание
+          if (dist < n1.r + n2.r && !isMobile) {
+            // Простое отталкивание только на десктопе
             const angle = Math.atan2(dy, dx);
-            const force = 0.2;
+            const force = 0.07;
             n1.vx -= Math.cos(angle) * force;
             n1.vy -= Math.sin(angle) * force;
             n2.vx += Math.cos(angle) * force;

@@ -2,8 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const locales = [
-  { code: "ru", label: <span className="inline-block align-middle mr-1"><svg width="18" height="12" viewBox="0 0 18 12"><rect width="18" height="4" y="0" fill="#fff"/><rect width="18" height="4" y="4" fill="#0039a6"/><rect width="18" height="4" y="8" fill="#d52b1e"/></svg></span> },
   { code: "en", label: <span className="inline-block align-middle mr-1"><svg width="18" height="12" viewBox="0 0 18 12"><rect width="18" height="12" fill="#fff"/><path d="M0 0l18 12M18 0L0 12" stroke="#00247d" strokeWidth="2"/><rect width="18" height="4" y="4" fill="#cf142b"/><rect width="4" height="12" x="7" fill="#cf142b"/></svg></span> },
+  { code: "ru", label: <span className="inline-block align-middle mr-1"><svg width="18" height="12" viewBox="0 0 18 12"><rect width="18" height="4" y="0" fill="#fff"/><rect width="18" height="4" y="4" fill="#0039a6"/><rect width="18" height="4" y="8" fill="#d52b1e"/></svg></span> },
 ];
 
 export default function LocaleToggle() {

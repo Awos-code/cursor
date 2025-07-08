@@ -2,17 +2,17 @@ import '../styles/globals.css';
 import { useEffect } from 'react';
 import MusicNotesBackground from "../components/MusicNotesBackground";
 import Preloader from "../components/Preloader";
-import SplashCursor from "../components/SplashCursor";
+// import SplashCursor from "../components/SplashCursor";
 import '../components/i18n';
 import Lenis from '@studio-freight/lenis';
+import '../styles/privacy-custom.css';
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
     // Автоматический выбор языка по браузеру при первой загрузке
     const saved = localStorage.getItem("i18nextLng");
     if (!saved) {
-      const browser = navigator.language.startsWith("en") ? "en" : "ru";
-      localStorage.setItem("i18nextLng", browser);
+      localStorage.setItem("i18nextLng", "en");
     }
     // Lenis smooth scroll
     const lenis = new Lenis({
@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Preloader />
       <MusicNotesBackground />
-      <SplashCursor />
+      {/* <SplashCursor /> */}
       <Component {...pageProps} />
     </>
   );

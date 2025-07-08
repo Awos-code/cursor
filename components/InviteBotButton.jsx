@@ -14,6 +14,7 @@ export default function InviteBotButton({ className = "" }) {
         href="https://discord.com/oauth2/authorize?client_id=1374414380137185312&permissions=2150985024&integration_type=0&scope=bot"
         target="_blank"
         rel="noopener noreferrer"
+        className="interactive-element"
       >
         {t('hero.invite')}
       </a>
