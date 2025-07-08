@@ -1,7 +1,8 @@
 import '../styles/globals.css';
 import { useEffect } from 'react';
-import MusicNotesBackground from "../components/MusicNotesBackground";
-import Preloader from "../components/Preloader";
+import dynamic from 'next/dynamic';
+const MusicNotesBackground = dynamic(() => import('../components/MusicNotesBackground'), { ssr: false });
+const Preloader = dynamic(() => import('../components/Preloader'), { ssr: false });
 // import SplashCursor from "../components/SplashCursor";
 import '../components/i18n';
 import Lenis from '@studio-freight/lenis';

@@ -28,7 +28,7 @@ function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-export default function MusicNotesBackground() {
+function MusicNotesBackground() {
   const containerRef = useRef(null);
   const notesRef = useRef([]);
   const animRef = useRef();
@@ -121,4 +121,6 @@ export default function MusicNotesBackground() {
   return (
     <div ref={containerRef} className="fixed inset-0 w-full h-full pointer-events-none z-0" aria-hidden="true" />
   );
-} 
+}
+
+export default MusicNotesBackground; 
