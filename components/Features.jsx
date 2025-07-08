@@ -66,8 +66,8 @@ export default function Features() {
               key={i}
               onMouseEnter={!isMobile ? (() => window.matchMedia('(pointer: fine)').matches && setHovered(i)) : undefined}
               onMouseLeave={!isMobile ? (() => setHovered(null)) : undefined}
-              className={`feature-card${isMobile ? ' mobile-fade-in' : ''}`}
-              style={{ '--card-index': i }}
+              className={`feature-card${isMobile ? ' mobile-fade-in mobile-no-pointer' : ''}`}
+              style={{ '--card-index': i, pointerEvents: isMobile ? 'none' : undefined }}
             >
           <FeatureCard
             icon={feature.icon}

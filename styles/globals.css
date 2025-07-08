@@ -657,6 +657,9 @@
     opacity: 0;
     animation: mobile-fade-in 0.6s ease forwards;
   }
+  .mobile-no-pointer {
+    pointer-events: none !important;
+  }
 }
 
 @keyframes mobile-fade-in {
