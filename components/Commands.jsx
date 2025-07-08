@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { setupRevealAnimation } from "../lib/utils";
 
+function useIsMobile() {
+  if (typeof window === 'undefined') return false;
+  return /Mobi|Android/i.test(navigator.userAgent);
+}
+
 const commandGroups = [
   {
     key: "all",
@@ -23,22 +28,19 @@ export default function Commands() {
   const commands = commandGroups[active].commands;
   const [flipped, setFlipped] = useState(Array(commands.length).fill(false));
   const groupNames = [t('allCommands.all'), t('allCommands.music'), t('allCommands.info')];
-
+  const isMobile = useIsMobile();
   useEffect(() => {
-    setupRevealAnimation('.commands-reveal');
-  }, []);
-
+    if (!isMobile) setupRevealAnimation('.commands-reveal');
+  }, [isMobile]);
   // Сброс flip при смене группы
   React.useEffect(() => {
     setFlipped(Array(commands.length).fill(false));
   }, [active]);
-
   const handleFlip = idx => {
     setFlipped(f => f.map((val, i) => (i === idx ? !val : val)));
   };
-
   return (
-    <section id="commands" className="py-6 md:py-12 text-white fade-in-up commands-reveal" style={{scrollMarginTop: '80px'}}>
+    <section id="commands" className={`py-6 md:py-12 text-white${isMobile ? '' : ' fade-in-up commands-reveal'}`} style={{scrollMarginTop: '80px'}}>
       <div className="container">
       <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold mb-6 md:mb-8 text-center drop-shadow-[0_0_16px_rgba(168,85,247,0.7)]">
@@ -58,6 +60,18 @@ export default function Commands() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
           {commands.map((cmd, idx) => {
             const cmdKey = cmd.replace("/", "");
+            if (isMobile) {
+              return (
+                <div key={cmd} className="w-full h-32">
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 rounded-2xl bg-[#181826]/80 border border-fuchsia-500 shadow-[0_0_24px_6px_rgba(168,85,247,0.3)] cursor-pointer">
+                    <span className="text-command text-xl mb-2 select-text" style={{fontFamily: 'JetBrains Mono, monospace'}}>{cmd}</span>
+                    <span className="text-body text-center break-words max-h-16 overflow-y-auto leading-snug px-1 select-text" style={{wordBreak: 'break-word'}}>
+                      {t(`commands.${cmdKey}`) || 'Описание команды...'}
+                    </span>
+                  </div>
+                </div>
+              );
+            }
             return (
                 <div key={cmd} className="[perspective:1000px] interactive-element fade-in-up" style={{animationDelay: `${idx * 80}ms`}}>
                 <div

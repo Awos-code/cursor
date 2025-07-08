@@ -3,9 +3,15 @@ import { useTranslation } from "react-i18next";
 import DecryptedText from "./ui/DecryptedText";
 import { AnimatePresence, motion } from "framer-motion";
 
+function useIsMobile() {
+  if (typeof window === 'undefined') return false;
+  return /Mobi|Android/i.test(navigator.userAgent);
+}
+
 export default function FAQ() {
   const { t } = useTranslation();
   const [open, setOpen] = useState(null);
+  const isMobile = useIsMobile();
   const questions = [
     { q: t('faq.q1'), a: t('faq.a1') },
     { q: t('faq.q2'), a: t('faq.a2') },
@@ -31,31 +37,39 @@ export default function FAQ() {
                 <span className="text-white hover:text-fuchsia-300 transition-colors duration-300 flex-1">{item.q}</span>
                 <span className={`ml-4 transition-all duration-500 ease-in-out transform ${open === i ? "rotate-45 text-fuchsia-400 scale-110" : "rotate-0 text-fuchsia-300 scale-100"}`}>+</span>
               </button>
-              <AnimatePresence initial={false}>
-                {open === i && (
-                  <motion.div
-                    key={"faq-answer-" + i}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                    className="overflow-hidden px-6"
-                  >
-                    <DecryptedText
-                      key={open === i ? `open-${i}` : `closed-${i}`}
-                      text={item.a}
-                      speed={30}
-                      maxIterations={15}
-                      sequential={true}
-                      revealDirection="start"
-                      className="text-gray-300 text-base"
-                      encryptedClassName="text-fuchsia-400 text-base"
-                      animateOn="view"
-                      parentClassName="block py-4"
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {isMobile ? (
+                open === i && (
+                  <div className="overflow-hidden px-6">
+                    <div className="text-gray-300 text-base py-4">{item.a}</div>
+                  </div>
+                )
+              ) : (
+                <AnimatePresence initial={false}>
+                  {open === i && (
+                    <motion.div
+                      key={"faq-answer-" + i}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden px-6"
+                    >
+                      <DecryptedText
+                        key={open === i ? `open-${i}` : `closed-${i}`}
+                        text={item.a}
+                        speed={30}
+                        maxIterations={15}
+                        sequential={true}
+                        revealDirection="start"
+                        className="text-gray-300 text-base"
+                        encryptedClassName="text-fuchsia-400 text-base"
+                        animateOn="view"
+                        parentClassName="block py-4"
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
             </div>
           ))}
         </div>

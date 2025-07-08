@@ -3,14 +3,18 @@ import FeatureCard from "./FeatureCard";
 import { useTranslation } from "react-i18next";
 import { setupRevealAnimation } from "../lib/utils";
 
+function useIsMobile() {
+  if (typeof window === 'undefined') return false;
+  return /Mobi|Android/i.test(navigator.userAgent);
+}
+
 export default function Features() {
   const { t } = useTranslation();
   const [hovered, setHovered] = useState(null);
-  
+  const isMobile = useIsMobile();
   useEffect(() => {
-    setupRevealAnimation('.features-reveal');
-  }, []);
-  
+    if (!isMobile) setupRevealAnimation('.features-reveal');
+  }, [isMobile]);
   const features = [
     {
       icon: "🎵",
@@ -51,7 +55,7 @@ export default function Features() {
   ];
 
   return (
-    <section id="features" className="pt-10 md:pt-24 py-8 md:py-20 text-white fade-in-up features-reveal">
+    <section id="features" className={`pt-10 md:pt-24 py-8 md:py-20 text-white${isMobile ? '' : ' fade-in-up features-reveal'}`}>
       <div className="container">
         <h2 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-blue-400 drop-shadow-[0_0_24px_rgba(168,85,247,0.7)] text-center mb-6 md:mb-12 font-tinos-business">
           {t('featuresTitle', 'Особенности NeuroTune')}
@@ -60,7 +64,7 @@ export default function Features() {
         {features.map((feature, i) => (
             <div
               key={i}
-              onMouseEnter={() => window.matchMedia('(pointer: fine)').matches && setHovered(i)}
+              onMouseEnter={() => !isMobile && window.matchMedia('(pointer: fine)').matches && setHovered(i)}
               onMouseLeave={() => setHovered(null)}
               className="feature-card"
               style={{ '--card-index': i }}
@@ -70,9 +74,9 @@ export default function Features() {
             title={feature.title}
             description={feature.description}
             color={feature.color}
-                enableTilt={hovered === i && window.matchMedia('(pointer: fine)').matches}
-                className={`fade-in-up`}
-                style={{animationDelay: `${i * 80}ms`}}
+                enableTilt={!isMobile && hovered === i && window.matchMedia('(pointer: fine)').matches}
+                className={isMobile ? '' : `fade-in-up`}
+                style={isMobile ? {} : {animationDelay: `${i * 80}ms`}}
           />
             </div>
         ))}
