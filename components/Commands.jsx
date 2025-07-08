@@ -62,8 +62,8 @@ export default function Commands() {
             const cmdKey = cmd.replace("/", "");
             if (isMobile) {
               return (
-                <div key={cmd} className="w-full h-32 mobile-fade-in">
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 rounded-2xl bg-[#181826]/80 border border-fuchsia-500 shadow-[0_0_24px_6px_rgba(168,85,247,0.3)] cursor-pointer">
+                <div key={cmd} className="w-full h-32 mobile-fade-in static">
+                  <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-[#181826]/80 border border-fuchsia-500 shadow-[0_0_24px_6px_rgba(168,85,247,0.3)] cursor-pointer w-full h-full">
                     <span className="text-command text-xl mb-2 select-text" style={{fontFamily: 'JetBrains Mono, monospace'}}>{cmd}</span>
                     <span className="text-body text-center break-words max-h-16 overflow-y-auto leading-snug px-1 select-text" style={{wordBreak: 'break-word'}}>
                       {t(`commands.${cmdKey}`) || 'Описание команды...'}
