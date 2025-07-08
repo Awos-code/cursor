@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 const MusicNotesBackground = dynamic(() => import('../components/MusicNotesBackground'), { ssr: false });
 const Preloader = dynamic(() => import('../components/Preloader'), { ssr: false });
@@ -9,6 +9,14 @@ import Lenis from '@studio-freight/lenis';
 import '../styles/privacy-custom.css';
 
 export default function App({ Component, pageProps }) {
+  const [showBg, setShowBg] = useState(true);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+      setShowBg(!isMobile);
+    }
+  }, []);
+
   useEffect(() => {
     // Автоматический выбор языка по браузеру при первой загрузке
     const saved = localStorage.getItem("i18nextLng");
@@ -38,7 +46,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Preloader />
-      <MusicNotesBackground />
+      {showBg && <MusicNotesBackground />}
       {/* <SplashCursor /> */}
       <Component {...pageProps} />
     </>

@@ -8,6 +8,10 @@ const nextConfig = {
     };
     return config;
   },
+  experimental: {
+    legacyBrowsers: false,
+    browsersListForSwc: true,
+  },
 };
 
 module.exports = nextConfig;
